@@ -8,16 +8,13 @@ server_socket.bind((server_host, server_port))
 number = random.randint(1,1000)
 print(number)
 server_socket.listen()
-counter = 0
+socket_client, addr = server_socket.accept()
 while True:
-    counter +=1
-    print(counter)
-    socket_client, addr = server_socket.accept()
     guess = socket_client.recv(1024)
     guess = int(guess.decode())
-    if number > guess:
+    if number < guess:
         output = "lower"
-    elif number < guess:
+    elif number > guess:
         output = "higher"
     else:
         output = "Correct"
